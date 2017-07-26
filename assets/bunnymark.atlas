@@ -1,0 +1,39 @@
+images {
+  image: "/assets/images/rabbitv3_batman.png"
+}
+images {
+  image: "/assets/images/rabbitv3_bb8.png"
+}
+images {
+  image: "/assets/images/rabbitv3.png"
+}
+images {
+  image: "/assets/images/rabbitv3_ash.png"
+}
+images {
+  image: "/assets/images/rabbitv3_frankenstein.png"
+}
+images {
+  image: "/assets/images/rabbitv3_neo.png"
+}
+images {
+  image: "/assets/images/rabbitv3_sonic.png"
+}
+images {
+  image: "/assets/images/rabbitv3_spidey.png"
+}
+images {
+  image: "/assets/images/rabbitv3_stormtrooper.png"
+}
+images {
+  image: "/assets/images/rabbitv3_superman.png"
+}
+images {
+  image: "/assets/images/rabbitv3_tron.png"
+}
+images {
+  image: "/assets/images/rabbitv3_wolverine.png"
+}
+margin: 0
+extrude_borders: 1
+inner_padding: 0

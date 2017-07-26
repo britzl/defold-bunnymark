@@ -1,0 +1,16 @@
+function init(self)
+	self.velocity = -math.random(100)
+	go.set_position(vmath.vector3(math.random(640), math.random(1000, 1100), 0))
+end
+
+function update(self, dt)
+	self.velocity = self.velocity - 1200 * dt
+
+	local pos = go.get_position()
+	pos.y = pos.y + self.velocity * dt
+	if pos.y < 60 then
+		self.velocity = -self.velocity
+		pos.y = 60
+	end
+	go.set_position(pos)
+end

@@ -1,0 +1,31 @@
+local bunnymark = require "bunnymark.bunnymark"
+
+local function animate_bunny(bunny)
+	go.set_position(vmath.vector3(math.random(640), 1030, 0), bunny.id)
+	go.animate(bunny.id, "position.y", go.PLAYBACK_LOOP_PINGPONG, 40, go.EASING_INQUAD, 2, math.random())
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+
+	bunnymark.start()
+	for i=1,500 do
+		animate_bunny(bunnymark.create_bunny())
+	end
+end
+
+function final(self)
+	bunnymark.stop()
+end
+
+function update(self, dt)
+	bunnymark.update()
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.released and action.y < 1030 then
+		for i=1,500 do
+			animate_bunny(bunnymark.create_bunny())
+		end
+	end
+end

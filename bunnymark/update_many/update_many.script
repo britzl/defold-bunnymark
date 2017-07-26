@@ -1,0 +1,17 @@
+local bunnymark = require "bunnymark.bunnymark"
+
+function init(self)
+	bunnymark.start()
+	for i=1,1023 do
+		bunnymark.create_bunny()
+	end
+end
+
+function final(self)
+	bunnymark.stop()
+end
+
+function update(self, dt)
+	bunnymark.update()
+	msg.post("@render:", "draw_text", { text = "Max no of script instances is 1024", position = vmath.vector3(10, 40, 0) } )
+end

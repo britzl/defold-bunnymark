@@ -1,0 +1,24 @@
+key_trigger {
+  input: KEY_1
+  action: "go_animate"
+}
+key_trigger {
+  input: KEY_2
+  action: "update_single"
+}
+key_trigger {
+  input: KEY_3
+  action: "update_many"
+}
+key_trigger {
+  input: KEY_ESC
+  action: "back"
+}
+key_trigger {
+  input: KEY_SPACE
+  action: "toggle_profile"
+}
+mouse_trigger {
+  input: MOUSE_BUTTON_1
+  action: "touch"
+}

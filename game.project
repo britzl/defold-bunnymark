@@ -1,0 +1,34 @@
+[project]
+title = Bunnymark
+
+[bootstrap]
+main_collection = /bunnymark/bunnymark.collectionc
+
+[input]
+game_binding = /input/game.input_bindingc
+
+[display]
+width = 640
+height = 1136
+variable_dt = 1
+
+[script]
+shared_state = 1
+
+[ios]
+bundle_identifier = com.britzl.bunnymark
+
+[osx]
+bundle_identifier = com.britzl.bunnymark
+
+[android]
+package = com.britzl.bunnymark
+
+[resource]
+max_resources = 30000
+
+[sprite]
+max_count = 30000
+
+[collection]
+max_instances = 30000
