@@ -2,10 +2,9 @@ local M = {}
 
 
 local bunnies = {}
-local frame_count = 0
-local start_timestamp = 0
+local frames = {}
 
-local TEXT = "Bunnies: %d FPS: %d. Click to add more."
+local TEXT = "Bunnies: %d FPS: %.2f. Click to add more."
 
 local draw_text_message = {
 	position = vmath.vector3(10, 20, 0)
@@ -28,8 +27,7 @@ local BUNNY_IMAGES = {
 
 function M.start()
 	M.bunnies = {}
-	frame_count = 0
-	start_timestamp = socket.gettime()
+	frames = {}
 end
 
 function M.stop()
@@ -48,8 +46,12 @@ function M.create_bunny()
 end
 
 function M.update()
-	frame_count = frame_count + 1
-	local fps = frame_count / (socket.gettime() - start_timestamp)
+	table.insert(frames, socket.gettime())
+	local fps = 0
+	if #frames == 61 then
+		table.remove(frames, 1)
+		fps = 1 / ((frames[#frames] - frames[1]) / (#frames - 1))
+	end
 	draw_text_message.text = TEXT:format(#M.bunnies, fps)
 	msg.post("@render:", "draw_text", draw_text_message)
 end
