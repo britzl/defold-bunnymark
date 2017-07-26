@@ -10,7 +10,6 @@ game_binding = /input/game.input_bindingc
 [display]
 width = 640
 height = 1136
-variable_dt = 1
 
 [script]
 shared_state = 1
@@ -32,3 +31,4 @@ max_count = 30000
 
 [collection]
 max_instances = 30000
+
