@@ -25,6 +25,8 @@ local BUNNY_IMAGES = {
 	hash("rabbitv3_wolverine"),
 }
 
+local MAX_BUNNIES = 16384
+
 function M.start()
 	M.bunnies = {}
 	frames = {}
@@ -38,11 +40,15 @@ function M.stop()
 end
 
 function M.create_bunny()
-	local id = factory.create("#factory")
-	msg.post(msg.url(nil, id, "sprite"), "play_animation", { id = BUNNY_IMAGES[math.random(1, #BUNNY_IMAGES)] })
-	local bunny = { id = id }
-	M.bunnies[#M.bunnies + 1] = bunny
-	return bunny
+	if #M.bunnies < MAX_BUNNIES-1 then
+		local id = factory.create("#factory")
+		msg.post(msg.url(nil, id, "sprite"), "play_animation", { id = BUNNY_IMAGES[math.random(1, #BUNNY_IMAGES)] })
+		local bunny = { id = id }
+		M.bunnies[#M.bunnies + 1] = bunny
+		return bunny
+	else
+		return nil, "Max bunnies (" .. MAX_BUNNIES .. ") reached"
+	end
 end
 
 function M.update()

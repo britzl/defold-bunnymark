@@ -23,12 +23,9 @@ bundle_identifier = com.britzl.bunnymark
 [android]
 package = com.britzl.bunnymark
 
-[resource]
-max_resources = 30000
-
 [sprite]
-max_count = 30000
+max_count = 16384
 
 [collection]
-max_instances = 30000
+max_instances = 16384
 

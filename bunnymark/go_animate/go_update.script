@@ -5,13 +5,23 @@ local function animate_bunny(bunny)
 	go.animate(bunny.id, "position.y", go.PLAYBACK_LOOP_PINGPONG, 40, go.EASING_INQUAD, 2, math.random())
 end
 
+local function spawn(amount)
+	for i=1,amount do
+		local bunny, error_message = bunnymark.create_bunny()
+		if bunny then
+			animate_bunny(bunny)
+		else
+			print(error_message)
+			break
+		end
+	end
+end
+
 function init(self)
 	msg.post(".", "acquire_input_focus")
 
 	bunnymark.start()
-	for i=1,500 do
-		animate_bunny(bunnymark.create_bunny())
-	end
+	spawn(500)
 end
 
 function final(self)
@@ -24,8 +34,6 @@ end
 
 function on_input(self, action_id, action)
 	if action_id == hash("touch") and action.released and action.y < 1030 then
-		for i=1,500 do
-			animate_bunny(bunnymark.create_bunny())
-		end
+		spawn(500)
 	end
 end
