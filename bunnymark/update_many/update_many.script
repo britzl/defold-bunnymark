@@ -5,6 +5,7 @@ function init(self)
 	for i=1,1023 do
 		bunnymark.create_bunny()
 	end
+	print("Max no of script instances is 1024")
 end
 
 function final(self)
@@ -13,5 +14,4 @@ end
 
 function update(self, dt)
 	bunnymark.update()
-	msg.post("@render:", "draw_text", { text = "Max no of script instances is 1024", position = vmath.vector3(10, 40, 0) } )
 end

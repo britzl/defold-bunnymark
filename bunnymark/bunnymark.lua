@@ -6,10 +6,6 @@ local frames = {}
 
 local TEXT = "Bunnies: %d FPS: %.2f. Click to add more."
 
-local draw_text_message = {
-	position = vmath.vector3(10, 20, 0)
-}
-
 local BUNNY_IMAGES = {
 	hash("rabbitv3_batman"),
 	hash("rabbitv3_bb8"),
@@ -58,8 +54,7 @@ function M.update()
 		table.remove(frames, 1)
 		fps = 1 / ((frames[#frames] - frames[1]) / (#frames - 1))
 	end
-	draw_text_message.text = TEXT:format(#M.bunnies, fps)
-	msg.post("@render:", "draw_text", draw_text_message)
+	label.set_text("#label", TEXT:format(#M.bunnies, fps))
 end
 
 return M
