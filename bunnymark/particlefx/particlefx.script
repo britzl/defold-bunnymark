@@ -1,0 +1,16 @@
+local bunnymark = require "bunnymark.bunnymark"
+
+
+function init(self)
+	particlefx.play("#bunnies")
+	bunnymark.start()
+end
+
+function final(self)
+	bunnymark.stop()
+end
+
+function update(self, dt)
+	bunnymark.update()
+	label.set_text("#label", ("Bunnies: 15000 FPS: %.2f."):format(bunnymark.get_fps()))		
+end

@@ -49,12 +49,19 @@ end
 
 function M.update()
 	table.insert(frames, socket.gettime())
+end
+
+function M.get_bunny_count()
+	return #M.bunnies
+end
+
+function M.get_fps()
 	local fps = 0
 	if #frames == 61 then
 		table.remove(frames, 1)
 		fps = 1 / ((frames[#frames] - frames[1]) / (#frames - 1))
 	end
-	label.set_text("#label", TEXT:format(#M.bunnies, fps))
+	return fps
 end
 
 return M

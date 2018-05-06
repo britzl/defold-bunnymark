@@ -14,4 +14,5 @@ end
 
 function update(self, dt)
 	bunnymark.update()
+	label.set_text("#label", ("Bunnies: %d FPS: %.2f."):format(bunnymark.get_bunny_count(), bunnymark.get_fps()))
 end

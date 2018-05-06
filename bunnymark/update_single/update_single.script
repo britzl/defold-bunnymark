@@ -43,6 +43,7 @@ function update(self, dt)
 		end
 		go.set_position(p, bunny.id)
 	end
+	label.set_text("#label", ("Bunnies: %d FPS: %.2f. Click to add more"):format(bunnymark.get_bunny_count(), bunnymark.get_fps()))	
 end
 
 function on_input(self, action_id, action)

@@ -10,6 +10,7 @@ game_binding = /input/game.input_bindingc
 [display]
 width = 640
 height = 1136
+variable_dt = 0
 
 [script]
 shared_state = 1
@@ -28,4 +29,7 @@ max_count = 16384
 
 [collection]
 max_instances = 16384
+
+[particle_fx]
+max_particle_count = 30000
 
