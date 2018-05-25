@@ -25,11 +25,14 @@ bundle_identifier = com.britzl.bunnymark
 package = com.britzl.bunnymark
 
 [sprite]
-max_count = 16384
+max_count = 32765
 
 [collection]
-max_instances = 16384
+max_instances = 32765
 
 [particle_fx]
 max_particle_count = 30000
+
+[physics]
+world_count = 5
 

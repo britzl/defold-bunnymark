@@ -7,11 +7,11 @@ end
 
 local function spawn(amount)
 	for i=1,amount do
-		local bunny, error_message = bunnymark.create_bunny()
+		local bunny = bunnymark.create_bunny()
 		if bunny then
 			animate_bunny(bunny)
 		else
-			print(error_message)
+			print("Unable to create more bunnies")
 			break
 		end
 	end

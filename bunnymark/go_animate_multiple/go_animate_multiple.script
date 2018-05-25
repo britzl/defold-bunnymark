@@ -1,0 +1,42 @@
+local bunnymark = require "bunnymark.bunnymark"
+
+
+local collections = {
+	msg.url("multiple:/go#proxy_one"),
+	msg.url("multiple:/go#proxy_two"),
+	msg.url("multiple:/go#proxy_three"),
+}
+
+
+local function load_next_collection(self)
+	if self.current_collection < #collections then
+		self.current_collection = self.current_collection + 1
+		msg.post(collections[self.current_collection], "async_load")
+	else
+		print("No more collections to load!")
+	end
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	self.current_collection = 0
+	bunnymark.start()
+	load_next_collection(self)
+end
+
+function final(self)
+	bunnymark.stop()
+end
+
+function update(self, dt)
+	bunnymark.update()
+	label.set_text("#label", ("Bunnies: %d FPS: %.2f. Click to add more"):format(bunnymark.get_bunny_count(), bunnymark.get_fps()))	
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("proxy_loaded") then
+		msg.post(sender, "enable")
+	elseif message_id == hash("collection_full") then
+		load_next_collection(self)
+	end
+end

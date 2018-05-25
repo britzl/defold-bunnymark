@@ -16,6 +16,7 @@ function init(self)
 
 	self.menu_root_node = gui.get_node("menu_root")
 	self.go_animate_node = gui.get_node("go_animate")
+	self.go_animate_multiple_node = gui.get_node("go_animate_multiple")
 	self.update_single_node = gui.get_node("update_single")
 	self.update_many_node = gui.get_node("update_many")
 	self.particlefx_node = gui.get_node("particlefx")
@@ -45,6 +46,8 @@ function on_input(self, action_id, action)
 				load(self, "#update_many_proxy")
 			elseif gui.pick_node(self.particlefx_node, action.x, action.y) then
 				load(self, "#particlefx_proxy")
+			elseif gui.pick_node(self.go_animate_multiple_node, action.x, action.y) then
+				load(self, "#go_animate_multiple_proxy")
 			end
 		end
 	else

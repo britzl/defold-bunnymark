@@ -4,7 +4,7 @@ embedded_instances {
   id: "go"
   data: "components {\n"
   "  id: \"go_update\"\n"
-  "  component: \"/bunnymark/go_animate/go_update.script\"\n"
+  "  component: \"/bunnymark/go_animate/go_animate.script\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"

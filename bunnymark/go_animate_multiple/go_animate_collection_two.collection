@@ -1,0 +1,35 @@
+name: "two"
+instances {
+  id: "go_animate_collection"
+  prototype: "/bunnymark/go_animate_multiple/go_animate_collection.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "go_animate_collection"
+    properties {
+      id: "min_x"
+      value: "220.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "max_x"
+      value: "420.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0

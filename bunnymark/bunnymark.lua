@@ -21,30 +21,24 @@ local BUNNY_IMAGES = {
 	hash("rabbitv3_wolverine"),
 }
 
-local MAX_BUNNIES = 16384
-
 function M.start()
 	M.bunnies = {}
 	frames = {}
 end
 
 function M.stop()
-	while #M.bunnies > 0 do
-		local bunny = table.remove(M.bunnies)
-		go.delete(bunny.id)
-	end
+	-- do nothing, bunnies will get deleted with the collection when it is unloaded
 end
 
 function M.create_bunny()
-	if #M.bunnies < MAX_BUNNIES-1 then
-		local id = factory.create("#factory")
+	local id = factory.create("#factory")
+	local bunny = nil
+	if id then
 		msg.post(msg.url(nil, id, "sprite"), "play_animation", { id = BUNNY_IMAGES[math.random(1, #BUNNY_IMAGES)] })
-		local bunny = { id = id }
+		bunny = { id = id }
 		M.bunnies[#M.bunnies + 1] = bunny
-		return bunny
-	else
-		return nil, "Max bunnies (" .. MAX_BUNNIES .. ") reached"
 	end
+	return bunny
 end
 
 function M.update()
