@@ -30,12 +30,29 @@ function M.stop()
 	-- do nothing, bunnies will get deleted with the collection when it is unloaded
 end
 
+function M.random_image()
+	return BUNNY_IMAGES[math.random(1, #BUNNY_IMAGES)]
+end
+
 function M.create_bunny()
 	local id = factory.create("#factory")
 	local bunny = nil
 	if id then
-		msg.post(msg.url(nil, id, "sprite"), "play_animation", { id = BUNNY_IMAGES[math.random(1, #BUNNY_IMAGES)] })
+		msg.post(msg.url(nil, id, "sprite"), "play_animation", { id = M.random_image() })
 		bunny = { id = id }
+		M.bunnies[#M.bunnies + 1] = bunny
+	end
+	return bunny
+end
+
+function M.create_gui_bunny()
+	local box = gui.new_box_node(vmath.vector3(), vmath.vector3())
+	local bunny = nil
+	if box then
+		gui.set_size_mode(box, gui.SIZE_MODE_AUTO)
+		gui.set_texture(box, "bunnymark")
+		gui.play_flipbook(box, M.random_image())
+		bunny = { node = box }
 		M.bunnies[#M.bunnies + 1] = bunny
 	end
 	return bunny

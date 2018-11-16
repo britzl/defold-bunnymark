@@ -1,0 +1,22 @@
+local bunnymark = require "bunnymark.bunnymark"
+
+local function animate_bunny(bunny)
+	gui.set_position(bunny.node, vmath.vector3(math.random(640), 1030, 0))
+	gui.animate(bunny.node, "position.y", 40, gui.EASING_INQUAD, 2, math.random(), nil, gui.PLAYBACK_LOOP_PINGPONG)
+end
+
+local function spawn(amount)
+	for i=1,amount do
+		local bunny = bunnymark.create_gui_bunny()
+		if bunny then
+			animate_bunny(bunny)
+		else
+			print("Unable to create more bunnies")
+			break
+		end
+	end
+end
+
+function init(self)
+	spawn(512)
+end
