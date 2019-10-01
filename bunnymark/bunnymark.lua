@@ -39,7 +39,9 @@ function M.create_bunny()
 	local bunny = nil
 	if id then
 		msg.post(msg.url(nil, id, "sprite"), "play_animation", { id = M.random_image() })
-		bunny = { id = id }
+		-- we use msg.url() inside the engine, if you need maximum speed
+		-- it's better to pre-cache URLs 
+		bunny = { id = msg.url(nil, id, nil) }
 		M.bunnies[#M.bunnies + 1] = bunny
 	end
 	return bunny
