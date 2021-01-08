@@ -21,6 +21,8 @@ function init(self)
 	self.update_many_node = gui.get_node("update_many")
 	self.particlefx_node = gui.get_node("particlefx")
 	self.gui_animate_node = gui.get_node("gui_animate")
+
+	gui.set_text(gui.get_node("version"), sys.get_engine_info().version)
 end
 
 function on_message(self, message_id, message, sender)
