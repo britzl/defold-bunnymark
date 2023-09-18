@@ -36,3 +36,6 @@ max_particle_count = 30000
 [physics]
 world_count = 5
 
+[html5]
+heap_size = 300
+
