@@ -50,23 +50,28 @@ void PositionSetterUserdata::update() {
 }
 
 void PositionSetterUserdata::updateVelocity(float dt) {
+    // Cache dereferenced member variables outside the loop to avoid repeated dereferencing
+    float velocity_decrement = 1200 * dt;
+    float position_limit = 50;
+
     for (int i = 0; i < instances.Size(); ++i) {
-        InstancePositionData instancePositionData = instances[i];
-        float velocity = instancePositionData.velocity;
-        dmVMath::Vector3 *position = instancePositionData.position;
-        velocity -= 1200 * dt;
+        InstancePositionData &instancePositionData = instances[i];
+        float &velocity = instancePositionData.velocity;  // Get the y component of velocity
+        dmVMath::Vector3 *position = instancePositionData.position;  // Pointer to the position vector
+
+        // Update velocity
+        velocity -= velocity_decrement;
 
         // Update position
-        position->setY(position->getY() + velocity * dt);
-        if (position->getY() < 50) {
-            position->setY(50);
+        float new_position_y = position->getY() + velocity * dt;
+        if (new_position_y < position_limit) {
+            new_position_y = position_limit;
             velocity = -velocity;
         }
+        position->setY(new_position_y);
 
-        // Update velocity in struct
-        instances[i].velocity = velocity;
-
-        dmGameObject::SetPosition(instancePositionData.rootInstance, dmVMath::Point3(*instancePositionData.position));
+        // Set the new position of the game object
+        dmGameObject::SetPosition(instancePositionData.rootInstance, dmVMath::Point3(*position));
     }
 }
 
