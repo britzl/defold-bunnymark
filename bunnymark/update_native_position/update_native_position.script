@@ -1,0 +1,56 @@
+local bunnymark = require "bunnymark.bunnymark"
+
+local function init_bunny(bunny)
+	bunny.position = vmath.vector3(math.random(640), math.random(930, 1030), 0)
+	bunny.velocity = -math.random(200)
+end
+
+local function spawn(self,amount)
+	for i=1,amount do
+		local bunny = bunnymark.create_bunny()
+		if bunny then
+			init_bunny(bunny)
+			self.position_updater:add_instance(bunny.id, bunny.position, bunny.velocity)
+		else
+			print("Unable to create more bunnies")
+			break
+		end
+	end
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	self.position_updater = native_set_position.new_position_setter()
+
+	bunnymark.start()
+	spawn(self,500)
+end
+
+function final(self)
+	bunnymark.stop()
+end
+
+function update(self, dt)
+	bunnymark.update()
+	local bunnies = bunnymark.bunnies
+	for i=#bunnymark.bunnies,1,-1 do
+		local bunny = bunnies[i]
+		bunny.velocity = bunny.velocity - 1200 * dt
+
+		local p = bunny.position
+		p.y = p.y + bunny.velocity * dt
+		if p.y < 50 then
+			p.y = 50
+			bunny.velocity = -bunny.velocity
+		end
+		--go.set_position(p, bunny.id)
+	end
+	self.position_updater:update()
+	label.set_text("#label", ("Bunnies: %d FPS: %.2f. Click to add more"):format(bunnymark.get_bunny_count(), bunnymark.get_fps()))	
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.released and action.y < 1030 then
+		spawn(self,500)
+	end
+end

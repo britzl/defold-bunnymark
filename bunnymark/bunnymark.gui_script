@@ -21,6 +21,8 @@ function init(self)
 	self.update_many_node = gui.get_node("update_many")
 	self.particlefx_node = gui.get_node("particlefx")
 	self.gui_animate_node = gui.get_node("gui_animate")
+	self.update_native_position = gui.get_node("update_native_position")
+	self.update_native_position_velocity = gui.get_node("update_native_position_velocity")
 
 	gui.set_text(gui.get_node("version"), sys.get_engine_info().version)
 end
@@ -53,6 +55,10 @@ function on_input(self, action_id, action)
 				load(self, "#go_animate_multiple_proxy")
 			elseif gui.pick_node(self.gui_animate_node, action.x, action.y) then
 				load(self, "#gui_animate_proxy")
+			elseif gui.pick_node(self.update_native_position, action.x, action.y) then
+				load(self, "#update_native_position_proxy")
+			elseif gui.pick_node(self.update_native_position_velocity, action.x, action.y) then
+				load(self, "#update_native_position_velocity_proxy")
 			end
 		end
 	else
